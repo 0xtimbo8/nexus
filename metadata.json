@@ -1,0 +1,26 @@
+{
+  "image": "IMAGE_URL",
+  "external_url": "https://nexusverse.app",
+  "description": "This is a test description.",
+  "name": "Test Model #1",
+  "attributes": [
+    {
+      "trait_type": "Base",
+      "value": "Starfish"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Surprised"
+    },
+    {
+      "trait_type": "Level",
+      "value": 5
+    }
+  ],
+  "animation_url": "MODEL_URL_FOR_OPENSEA",
+  "model_url": "MODEL_URL"
+}
