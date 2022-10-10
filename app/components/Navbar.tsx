@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "@styles/Navbar.module.css";
-import { HStack, Image } from "@chakra-ui/react";
+import { HStack, Image, Text } from "@chakra-ui/react";
 import { ConnectKitButton } from "connectkit";
 import { useAccount } from "wagmi";
 
@@ -17,7 +17,12 @@ const Navbar = () => {
           className={styles.logo}
         ></Image>
       </Link>
-      <ConnectKitButton />
+      <HStack className={styles.navLeftSection}>
+        <Link href="/create">
+          <Text cursor="pointer">Create</Text>
+        </Link>
+        <ConnectKitButton />
+      </HStack>
     </HStack>
   );
 };

@@ -16,92 +16,9 @@ import {
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
-
-const exploreAssets = [
-  {
-    image: "/mask.png",
-    title: "SF Light- Fighter X6",
-    subtitle: "Floor: 8 KLAY",
-  },
-  {
-    image: "/mask.png",
-    title: "SF Light- Fighter X6",
-    subtitle: "Floor: 8 KLAY",
-  },
-  {
-    image: "/mask.png",
-    title: "SF Light- Fighter X6",
-    subtitle: "Floor: 8 KLAY",
-  },
-  {
-    image: "/mask.png",
-    title: "SF Light- Fighter X6",
-    subtitle: "Floor: 8 KLAY",
-  },
-];
-
-const trendingAssets = [
-  {
-    image: "/1.png",
-    collection: "Space Troopers",
-    floor: 3.09,
-    volume: 1188,
-  },
-  {
-    image: "/2.png",
-    collection: "Space Troopers",
-    floor: 3.09,
-    volume: 1188,
-  },
-  {
-    image: "/1.png",
-    collection: "Space Troopers",
-    floor: 3.09,
-    volume: 1188,
-  },
-  {
-    image: "/2.png",
-    collection: "Space Troopers",
-    floor: 3.09,
-    volume: 1188,
-  },
-  {
-    image: "/1.png",
-    collection: "Space Troopers",
-    floor: 3.09,
-    volume: 1188,
-  },
-];
-
-type ImageProps = {
-  w?: string;
-  h?: string;
-  image: string;
-  title: string;
-  subtitle: string;
-};
-
-function ImageContainer({
-  w = "100%",
-  h = "100%",
-  image,
-  title,
-  subtitle,
-}: ImageProps) {
-  return (
-    <VStack w={w} h={h} className={styles.landingImageContainer}>
-      <Image
-        alt="image alt"
-        src={image}
-        className={styles.landingImage}
-      ></Image>
-      <VStack className={styles.landingImageCaption}>
-        <Text className={styles.landingImageCaptionTitle}>{title}</Text>
-        <Text className={styles.landingImageCaptionSubtitle}>{subtitle}</Text>
-      </VStack>
-    </VStack>
-  );
-}
+import Link from "next/link";
+import { exploreAssets, trendingAssets } from "../data/assets";
+import ImageContainer from "../components/ImageContainer";
 
 const Home: NextPage = () => {
   return (
@@ -118,15 +35,17 @@ const Home: NextPage = () => {
             </Text>
             <HStack>
               <Button className={styles.landingBtn}>Explore</Button>
-              <Button className={styles.landingBtn}>Create</Button>
+              <Link href="/create">
+                <Button className={styles.landingBtn}>Create</Button>
+              </Link>
             </HStack>
           </VStack>
           <ImageContainer
-            w="478px"
-            h="319px"
+            w="530px"
             image="/fighter.png"
             title="SF Light- Fighter X6"
             subtitle="Floor: 8 KLAY"
+            link={`/collection/1`}
           />
         </HStack>
         <VStack w="100%">
@@ -141,6 +60,7 @@ const Home: NextPage = () => {
                 image={image}
                 title={title}
                 subtitle={subtitle}
+                collectionId={1}
               />
             ))}
           </HStack>
@@ -240,9 +160,6 @@ const Home: NextPage = () => {
           </HStack>
         </VStack>
       </main>
-      <HStack className={styles.footer}>
-        <Text>@ 2022 Nexus</Text>
-      </HStack>
       <Box className={styles.ellipseOverlay}></Box>
       <Image alt="hero" src="/earth.png" className={styles.ellipse}></Image>
       <Box className={styles.heroOverlay1}></Box>

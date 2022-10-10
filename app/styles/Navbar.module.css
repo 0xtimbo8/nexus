@@ -5,10 +5,14 @@
   padding: 2rem;
   z-index: 100 !important;
   height: 72px;
-  z-index: 10;
+  z-index: 1;
   color: white;
 }
 
 .logo {
   width: 160px;
+}
+
+.navLeftSection {
+  gap: 1rem;
 }
