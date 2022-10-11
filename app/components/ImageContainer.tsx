@@ -8,7 +8,7 @@ type ImageProps = {
   image: string;
   title?: string;
   subtitle?: string;
-  link: string;
+  link?: string;
 };
 
 function ImageContainer({

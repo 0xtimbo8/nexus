@@ -67,7 +67,6 @@ const Home: NextPage = () => {
                 image={image}
                 title={title}
                 subtitle={subtitle}
-                collectionId={1}
               />
             ))}
           </HStack>
