@@ -13,6 +13,7 @@ import {
   Td,
   TableContainer,
   Box,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
@@ -34,7 +35,9 @@ const Home: NextPage = () => {
               the Klaytn blockchain
             </Text>
             <HStack>
-              <Button className={styles.landingBtn}>Explore</Button>
+              <Link href="/explore">
+                <Button className={styles.landingBtn}>Explore</Button>
+              </Link>
               <Link href="/create">
                 <Button className={styles.landingBtn}>Create</Button>
               </Link>
@@ -51,7 +54,11 @@ const Home: NextPage = () => {
         <VStack w="100%">
           <HStack className={styles.sectionTitleContainer}>
             <Text className={styles.sectionTitle}>Explore</Text>
-            <Text className={styles.sectionSubtitle}>View more</Text>
+            <Link href="/explore">
+              <Text className={styles.sectionSubtitle} cursor="pointer">
+                View more
+              </Text>
+            </Link>
           </HStack>
           <HStack w="100%">
             {exploreAssets.map(({ image, title, subtitle }, idx) => (
@@ -114,7 +121,6 @@ const Home: NextPage = () => {
         <VStack w="100%">
           <HStack className={styles.sectionTitleContainer}>
             <Text className={styles.sectionTitle}>Game spotlight</Text>
-            <Text className={styles.sectionSubtitle}>View more</Text>
           </HStack>
           <HStack w="100%">
             {exploreAssets
@@ -132,11 +138,10 @@ const Home: NextPage = () => {
         <VStack w="100%">
           <HStack className={styles.sectionTitleContainer}>
             <Text className={styles.sectionTitle}>Browse by category</Text>
-            <Text className={styles.sectionSubtitle}>View more</Text>
           </HStack>
-          <HStack w="100%">
-            {exploreAssets
-              .slice(0, 3)
+          <SimpleGrid columns={3} w="100%" gap={2}>
+            {[...exploreAssets, ...exploreAssets]
+              .slice(0, 6)
               .map(({ image, title, subtitle }, idx) => (
                 <ImageContainer
                   key={idx}
@@ -145,19 +150,7 @@ const Home: NextPage = () => {
                   subtitle={subtitle}
                 />
               ))}
-          </HStack>
-          <HStack w="100%">
-            {exploreAssets
-              .slice(0, 3)
-              .map(({ image, title, subtitle }, idx) => (
-                <ImageContainer
-                  key={idx}
-                  image={image}
-                  title={title}
-                  subtitle={subtitle}
-                />
-              ))}
-          </HStack>
+          </SimpleGrid>
         </VStack>
       </main>
       <Box className={styles.ellipseOverlay}></Box>

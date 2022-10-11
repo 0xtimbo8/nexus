@@ -18,9 +18,6 @@ const Navbar = () => {
         ></Image>
       </Link>
       <HStack className={styles.navLeftSection}>
-        <Link href="/create">
-          <Text cursor="pointer">Create</Text>
-        </Link>
         <ConnectKitButton />
       </HStack>
     </HStack>
