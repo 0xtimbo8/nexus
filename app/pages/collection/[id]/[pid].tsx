@@ -14,19 +14,26 @@ import {
   ModalCloseButton,
   useDisclosure,
   Input,
+  Link as ChakraLink,
+  Spinner,
 } from "@chakra-ui/react";
 import ImageContainer from "@components/ImageContainer";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import styles from "@styles/Asset.module.css";
+import { Canvas } from "@react-three/fiber";
+import { lazy, Suspense, useState } from "react";
+import { OrbitControls } from "@react-three/drei";
+
+const Model = lazy(() => import("@components/Scene"));
 
 const details = [
   {
     title: "Contract address",
-    subtitle: "0x24e9513e8e7dbf8973dfacf7b5b3b3a7b9a2d2d7",
+    subtitle: "0x7d3bc6b5de22a9bf0fd0c86954f42021736d4532",
   },
   {
     title: "Token ID",
-    subtitle: 12,
+    subtitle: 291,
   },
   {
     title: "Blockchain",
@@ -38,16 +45,25 @@ const details = [
     link: "/",
   },
   {
-    title: "Model",
+    title: "IPFS Metadata",
     subtitle: "",
     link: "/",
   },
   {
-    title: "Model",
+    title: "View on KlaytnFinder",
     subtitle: "",
-    link: "/",
+    link: "https://www.klaytnfinder.io/account/0x7d3bc6b5de22a9bf0fd0c86954f42021736d4532",
   },
 ];
+
+const asset = {
+  name: "SF Light - Fighter 291",
+  description:
+    "A space fighter is a small spacecraft designed for combat in space. They are typically equipped with weapons such as lasers and missiles, and are used to protect larger spacecraft or to attack enemy targets. Space fighters are agile and maneuverable, and can operate in both atmosphere and vacuum.",
+  collection: "Space Fighter Collection",
+  price: 193.23,
+  fiat: 27.05,
+};
 
 type ModalProps = {
   isOpen: boolean;
@@ -56,33 +72,154 @@ type ModalProps = {
 };
 
 function TradeModal({ isOpen, onClose, isSell }: ModalProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTxnSuccessful, setIsTxnSuccessful] = useState(true);
+
+  function handlePurchaseNFT() {
+    setIsLoading(true);
+  }
+
+  if (isTxnSuccessful && !isSell) {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay className={styles.modalOverlay} />
+        <ModalContent className={styles.modalContent}>
+          <ModalHeader className={styles.modalHeader}>
+            Transaction Confirmation
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack>
+              <Text fontSize="20px">
+                Your purchase was successfully confirmed!
+              </Text>
+              <Box h="1rem"></Box>
+              <HStack className={styles.modalSubContainer}>
+                <Image
+                  alt="modal"
+                  src="/20.png"
+                  className={styles.modalImage}
+                ></Image>
+                <HStack className={styles.modalSubTextContainer}>
+                  <VStack alignItems="flex-start">
+                    <Text className={styles.modalTitle}>{asset.name}</Text>
+                    <Text className={styles.modalSubtitle}>
+                      {asset.collection}
+                    </Text>
+                  </VStack>
+                  <VStack alignItems="flex-end">
+                    <Text className={styles.modalTitle}>
+                      {asset.price} KLAY
+                    </Text>
+                    <Text className={styles.modalSubtitle}>
+                      ${asset.fiat} USD
+                    </Text>
+                  </VStack>
+                </HStack>
+              </HStack>
+              <Box h="1rem"></Box>
+              <HStack>
+                <Button className={styles.modalBtn} onClick={handlePurchaseNFT}>
+                  View your collection
+                </Button>
+                <Button
+                  className={styles.modalBtn2}
+                  onClick={handlePurchaseNFT}
+                >
+                  View transaction
+                </Button>
+              </HStack>
+            </VStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
+
+  if (isTxnSuccessful && isSell) {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay className={styles.modalOverlay} />
+        <ModalContent className={styles.modalContent}>
+          <ModalHeader className={styles.modalHeader}>
+            Transaction Confirmation
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack>
+              <Text fontSize="20px">
+                Your listing was successfully created!
+              </Text>
+              <Box h="1rem"></Box>
+              <HStack className={styles.modalSubContainer}>
+                <Image
+                  alt="modal"
+                  src="/20.png"
+                  className={styles.modalImage}
+                ></Image>
+                <HStack className={styles.modalSubTextContainer}>
+                  <VStack alignItems="flex-start">
+                    <Text className={styles.modalTitle}>{asset.name}</Text>
+                    <Text className={styles.modalSubtitle}>
+                      {asset.collection}
+                    </Text>
+                  </VStack>
+                  <VStack alignItems="flex-end">
+                    <Text className={styles.modalTitle}>
+                      {asset.price} KLAY
+                    </Text>
+                    <Text className={styles.modalSubtitle}>
+                      ${asset.fiat} USD
+                    </Text>
+                  </VStack>
+                </HStack>
+              </HStack>
+              <Box h="1rem"></Box>
+              <HStack>
+                <Button className={styles.modalBtn} onClick={handlePurchaseNFT}>
+                  View transaction
+                </Button>
+              </HStack>
+            </VStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay className={styles.modalOverlay} />
       <ModalContent className={styles.modalContent}>
-        <ModalHeader className={styles.modalHeader}>Modal Title</ModalHeader>
+        <ModalHeader className={styles.modalHeader}>
+          {isSell ? "Sell NFT" : "Purchase NFT"}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack>
             <HStack className={styles.modalSubContainer}>
               <Image
                 alt="modal"
-                src="/fighter.png"
+                src="/20.png"
                 className={styles.modalImage}
               ></Image>
               <HStack className={styles.modalSubTextContainer}>
                 <VStack alignItems="flex-start">
-                  <Text className={styles.modalTitle}>
-                    SF Light - Fighter x6
-                  </Text>
+                  <Text className={styles.modalTitle}>{asset.name}</Text>
                   <Text className={styles.modalSubtitle}>
-                    Space Fighter Collection
+                    {asset.collection}
                   </Text>
                 </VStack>
-                <VStack alignItems="flex-end">
-                  <Text className={styles.modalTitle}>12.35 KLAY</Text>
-                  <Text className={styles.modalSubtitle}>$1827 USD</Text>
-                </VStack>
+                {!isSell && (
+                  <VStack alignItems="flex-end">
+                    <Text className={styles.modalTitle}>
+                      {asset.price} KLAY
+                    </Text>
+                    <Text className={styles.modalSubtitle}>
+                      ${asset.fiat} USD
+                    </Text>
+                  </VStack>
+                )}
               </HStack>
             </HStack>
             <Box h="1rem"></Box>
@@ -95,20 +232,27 @@ function TradeModal({ isOpen, onClose, isSell }: ModalProps) {
                 <VStack className={styles.inputContainer}>
                   <Text className={styles.modalTitle}>Price</Text>
                   <VStack className={styles.inputUnitContainer}>
-                    <Input className={styles.modalInput}></Input>
+                    <Input type="number" className={styles.modalInput}></Input>
                     <Text className={styles.inputUnit}>KLAY</Text>
                   </VStack>
                 </VStack>
                 <VStack className={styles.inputContainer}>
                   <Text className={styles.modalTitle}>Duration</Text>
                   <VStack className={styles.inputUnitContainer}>
-                    <Input className={styles.modalInput}></Input>
+                    <Input type="number" className={styles.modalInput}></Input>
+                    <Text className={styles.inputUnit}>days</Text>
                   </VStack>
                 </VStack>
               </HStack>
             )}
-            <Button className={styles.modalBtn}>
-              {isSell ? "Create listing" : "Purchase NFT"}
+            <Button className={styles.modalBtn} onClick={handlePurchaseNFT}>
+              {isLoading ? (
+                <Spinner color="black" />
+              ) : isSell ? (
+                "Create listing"
+              ) : (
+                "Purchase NFT"
+              )}
             </Button>
           </VStack>
         </ModalBody>
@@ -119,32 +263,59 @@ function TradeModal({ isOpen, onClose, isSell }: ModalProps) {
 
 function Asset() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isOwner = true;
 
   return (
     <VStack className={styles.main}>
-      <TradeModal isOpen={isOpen} onClose={onClose} isSell />
-      <ImageContainer image={"/fighter.png"} w="649.38px"></ImageContainer>
+      <TradeModal isOpen={isOpen} onClose={onClose} isSell={isOwner} />
+      <VStack
+        w="1000px"
+        h="500px"
+        borderRadius="20px"
+        overflow="hidden"
+        background={`url("/bg.jpg") no-repeat center center fixed`}
+      >
+        <Suspense fallback={null}>
+          <Canvas
+            camera={{
+              position: [-50, 100, 50],
+              rotation: [50, 50, 0],
+              far: 500,
+            }}
+          >
+            <pointLight position={[50, 70, 50]} intensity={10} />
+            <pointLight position={[-50, 70, 50]} intensity={10} />
+            <rectAreaLight
+              width={3}
+              height={3}
+              color={"#fff"}
+              intensity={54}
+              position={[-2, 0, 5]}
+              lookAt={[0, 0, 0]}
+              penumbra={1}
+              castShadow
+            />
+
+            <Model />
+            <OrbitControls />
+          </Canvas>
+        </Suspense>
+      </VStack>
       <HStack alignItems="flex-start" gap="1rem" pt="1rem">
         <VStack alignItems="flex-start">
-          <Text className={styles.title}>SF Light - Fighter x6</Text>
-          <Text className={styles.subtitle}>
-            A space fighter is a small spacecraft designed for combat in space.
-            They are typically equipped with weapons such as lasers and
-            missiles, and are used to protect larger spacecraft or to attack
-            enemy targets. Space fighters are agile and maneuverable, and can
-            operate in both atmosphere and vacuum.
-          </Text>
+          <Text className={styles.title}>{asset.name}</Text>
+          <Text className={styles.subtitle}>{asset.description}</Text>
           <VStack className={styles.minterContainer}>
             <Text className={styles.minterTitle} m={0}>
-              Minter
+              Collection
             </Text>
             <HStack>
               <Image
                 alt="user"
-                src="/user.png"
+                src="/fighter.png"
                 className={styles.minterImage}
               ></Image>
-              <Text className={styles.minter}>0xfa87...a497</Text>
+              <Text className={styles.minter}>{asset.collection}</Text>
             </HStack>
           </VStack>
           <VStack gap="1rem">
@@ -204,7 +375,11 @@ function Asset() {
                   {subtitle && (
                     <Text className={styles.detailSubtitle}>{subtitle}</Text>
                   )}
-                  {link && <ExternalLinkIcon />}
+                  {link && (
+                    <ChakraLink href={link} isExternal>
+                      <ExternalLinkIcon />
+                    </ChakraLink>
+                  )}
                 </HStack>
               ))}
             </VStack>
@@ -212,11 +387,18 @@ function Asset() {
         </VStack>
         <Box pt="1rem">
           <VStack className={styles.priceContainer}>
-            <Text className={styles.priceTitle}>Price</Text>
-            <Text className={styles.priceTag}>12.35 KLAY</Text>
-            <Text className={styles.priceUSD}>$1827 USD</Text>
+            <Text className={styles.priceTitle}>
+              {isOwner ? "Asset not for sale" : "Price"}
+            </Text>
+            {isOwner && <Box h=".5rem"></Box>}
+            {!isOwner && (
+              <Text className={styles.priceTag}>{asset.price} KLAY</Text>
+            )}
+            {!isOwner && (
+              <Text className={styles.priceUSD}>${asset.fiat} USD</Text>
+            )}
             <Button className={styles.purchaseBtn} onClick={onOpen}>
-              Purchase
+              {isOwner ? "Create listing" : "Purchase"}
             </Button>
           </VStack>
         </Box>

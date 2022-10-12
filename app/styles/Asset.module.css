@@ -51,6 +51,7 @@
 .minterImage {
   width: 42px;
   height: 42px;
+  border-radius: 50%;
 }
 
 .historyImage {
@@ -275,6 +276,18 @@
   font-size: 16px;
   line-height: 20px;
   color: #000000;
+}
+
+.modalBtn2 {
+  width: 222px !important;
+  height: 53px !important;
+  border: 0.5px solid #f8f8f8 !important;
+  border-radius: 10px !important;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #f8f8f8;
+  background-color: transparent !important;
 }
 
 .modalInput {

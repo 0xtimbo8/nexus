@@ -21,7 +21,12 @@ function ImageContainer({
 }: ImageProps) {
   return (
     <Link href={link ?? ""}>
-      <VStack w={w} h={h} className={styles.landingImageContainer}>
+      <VStack
+        w={w}
+        h={h}
+        className={styles.landingImageContainer}
+        cursor="pointer"
+      >
         <Image
           alt="image alt"
           src={image}

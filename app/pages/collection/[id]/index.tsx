@@ -1,7 +1,15 @@
-import { VStack, Image, HStack, Text, Box, SimpleGrid } from "@chakra-ui/react";
+import {
+  VStack,
+  Image,
+  HStack,
+  Text,
+  Box,
+  SimpleGrid,
+  Button,
+} from "@chakra-ui/react";
 import styles from "@styles/Collection.module.css";
 import ImageContainer from "@components/ImageContainer";
-import { exploreAssets } from "@data/assets";
+import { collectionAssets, exploreAssets } from "@data/assets";
 
 function Collection() {
   return (
@@ -21,7 +29,7 @@ function Collection() {
         ></Image>
       </VStack>
       <VStack className={styles.titleTextContainer}>
-        <Text className={styles.title}>Space fighters collection</Text>
+        <Text className={styles.title}>Space Fighters (3rd Edition)</Text>
         <HStack>
           <Text className={styles.username}>By</Text>
           <Image
@@ -32,7 +40,9 @@ function Collection() {
           <Text className={styles.username}>0xfa87...a497</Text>
         </HStack>
         <Text className={styles.subtitle}>
-          I am the ruthless NFT collector in neverland
+          Space fighters are small, maneuverable spacecraft designed for combat
+          in space. They are equipped with weapons and armor, and often have
+          powerful engines and maneuverability systems.
         </Text>
         <HStack className={styles.statsContainer}>
           <HStack>
@@ -70,7 +80,7 @@ function Collection() {
             </Text>{" "}
             · Created{" "}
             <Text fontWeight={700} as="span">
-              Feb 2022
+              Oct 2022
             </Text>
           </Text>
         </HStack>
@@ -80,18 +90,19 @@ function Collection() {
         <Text className={styles.sectionTitle}>7777 items</Text>
       </HStack>
       <SimpleGrid columns={4} w="100%" gap="1rem">
-        {[...exploreAssets, ...exploreAssets].map(
-          ({ image, title, subtitle }, idx) => (
-            <ImageContainer
-              key={idx}
-              image={image}
-              title={title}
-              subtitle={subtitle}
-              link="/collection/1/1"
-            />
-          )
-        )}
+        {collectionAssets.map(({ name, listing, image }, idx) => (
+          <ImageContainer
+            key={idx}
+            image={image}
+            title={name}
+            subtitle={`Listing ${listing} KLAY`}
+            link="/collection/0x7d3bc6b5de22a9bf0fd0c86954f42021736d4532/1"
+          />
+        ))}
       </SimpleGrid>
+      <VStack pt="2rem">
+        <Button className={styles.landingBtn}>Load more</Button>
+      </VStack>
     </VStack>
   );
 }

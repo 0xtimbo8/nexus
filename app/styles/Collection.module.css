@@ -56,6 +56,8 @@
 
 .subtitle {
   color: #d9d9d9;
+  width: 900px;
+  text-align: center;
 }
 
 .klaytn {
@@ -86,4 +88,18 @@
 .titleTextContainer {
   gap: 0.5rem;
   padding: 1rem 0;
+}
+
+.landingBtn {
+  width: 180px !important;
+  height: 50px !important;
+  background: #18151e !important;
+  border: 1px solid #211e27 !important;
+  border-radius: 15px !important;
+  font-family: "Bai Jamjuree";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff;
+  z-index: 100;
 }
