@@ -2,7 +2,7 @@
 
 `GET https://nexus-api-v1.onrender.com/assets/:address`
 
-This endpoint returns a set of assets based on the specified user CSC address.
+This endpoint returns a set of assets based on the specified user Klaytn address.
 
 The endpoint will return the following fields:
 
