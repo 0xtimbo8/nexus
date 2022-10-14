@@ -16,3 +16,17 @@
 .navLeftSection {
   gap: 1rem;
 }
+
+.navbarBtn {
+  width: 150px !important;
+  height: 45px !important;
+  background: #18151e !important;
+  border: 1px solid #211e27 !important;
+  border-radius: 15px !important;
+  font-family: "Bai Jamjuree";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff;
+  z-index: 100;
+}

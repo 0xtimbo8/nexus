@@ -54,7 +54,7 @@ function Collection() {
             ></Image>
             <Text className={styles.attributeBold}>
               <Text fontWeight={700} as="span">
-                4819
+                25.1K
               </Text>{" "}
               ·
             </Text>
@@ -68,7 +68,7 @@ function Collection() {
             ></Image>
             <Text>
               <Text fontWeight={700} as="span">
-                0.2
+                12.39
               </Text>{" "}
               ·
             </Text>
@@ -76,7 +76,7 @@ function Collection() {
           <Text className={styles.attribute}>
             Items{" "}
             <Text fontWeight={700} as="span">
-              8.4K
+              7.7K
             </Text>{" "}
             · Created{" "}
             <Text fontWeight={700} as="span">
@@ -87,7 +87,7 @@ function Collection() {
       </VStack>
       <Box className={styles.divider}></Box>
       <HStack className={styles.sectionTitleContainer}>
-        <Text className={styles.sectionTitle}>7777 items</Text>
+        <Text className={styles.sectionTitle}>7,777 items</Text>
       </HStack>
       <SimpleGrid columns={4} w="100%" gap="1rem">
         {collectionAssets.map(({ name, listing, image }, idx) => (

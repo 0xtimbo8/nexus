@@ -1,21 +1,54 @@
-import { WagmiConfig, createClient } from "wagmi";
-import { ConnectKitProvider, getDefaultClient } from "connectkit";
-import "../styles/globals.css";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
-import Head from "next/head";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "@components/Navbar";
+import { useEffect, useState } from "react";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { withTheme } from "@emotion/react";
+import "@rainbow-me/rainbowkit/styles.css";
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+  Theme,
+  darkTheme,
+  Chain,
+} from "@rainbow-me/rainbowkit";
+import { publicProvider } from "wagmi/providers/public";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import merge from "lodash.merge";
+import Head from "next/head";
+import Footer from "../components/Footer";
 
-const alchemyId = process.env.ALCHEMY_ID;
+const klaytnChain: Chain = {
+  id: 1001,
+  name: "Baobao Testnet",
+  network: "KLAY",
+  iconUrl: "/klaytn.png",
+  iconBackground: "#18151E",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Klay Token",
+    symbol: "KLAY",
+  },
+  rpcUrls: {
+    default: "https://api.baobab.klaytn.net:8651/",
+  },
+  blockExplorers: {
+    default: { name: "Explorer", url: "https://baobab.scope.klaytn.com/" },
+  },
+  testnet: true,
+};
 
-const client = createClient(
-  getDefaultClient({
-    appName: "Your App Name",
-    alchemyId,
-  })
-);
+const { chains, provider } = configureChains([klaytnChain], [publicProvider()]);
+
+const { connectors } = getDefaultWallets({
+  appName: "Nexus",
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 
 /* Theming */
 const theme = extendTheme({
@@ -34,10 +67,22 @@ const theme = extendTheme({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+/* RainbowKit Theming */
+const customTheme = merge(darkTheme(), {
+  colors: {
+    accentColor: "#18151E",
+  },
+} as Theme);
+
+function MyApp({ Component, pageProps, router }: AppProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   return (
-    <WagmiConfig client={client}>
-      <ConnectKitProvider>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains} theme={customTheme}>
         <ChakraProvider theme={theme}>
           <Head>
             <title>Nexus: Metaverse Marketplace</title>
@@ -45,10 +90,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Navbar />
-          <Component {...pageProps} />
+          <Component {...pageProps} key={router.route} />
           <Footer />
         </ChakraProvider>
-      </ConnectKitProvider>
+      </RainbowKitProvider>
     </WagmiConfig>
   );
 }

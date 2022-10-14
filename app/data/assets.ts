@@ -26,28 +26,28 @@ export const trendingAssets = [
     rank: 1,
     image: "/a.png",
     collection: "Game of Thrones",
-    floor: 19900.09,
+    floor: 1990.09,
     volume: 201.3,
   },
   {
     rank: 2,
     image: "/b.png",
     collection: "Fallout 2: The End",
-    floor: 18372.1,
+    floor: 1837.1,
     volume: 93.2,
   },
   {
     rank: 3,
     image: "/c.png",
     collection: "Pirate Island NFTs",
-    floor: 5932.83,
+    floor: 593.83,
     volume: 101.2,
   },
   {
     rank: 4,
     image: "/d.png",
     collection: "Metro Battle v2",
-    floor: 12039.13,
+    floor: 1209.13,
     volume: 84.2,
   },
   {
@@ -68,7 +68,7 @@ export const trendingAssets = [
     rank: 7,
     image: "/g.png",
     collection: "X-3 Air Force Fighters",
-    floor: 91843.19,
+    floor: 9184.19,
     volume: 93.2,
   },
   {
@@ -82,7 +82,7 @@ export const trendingAssets = [
     rank: 9,
     image: "/i.png",
     collection: "Gameboy Color 500",
-    floor: 19034.39,
+    floor: 1904.39,
     volume: 94.9,
   },
   {
@@ -156,17 +156,17 @@ export const featured = [
   },
   {
     name: "The Lost Watch Collection",
-    floor: 4992.38,
+    floor: 492.38,
     image: "/13.png",
   },
   {
     name: "Blade Runner 3049: Interior",
-    floor: 1892.38,
+    floor: 182.38,
     image: "/14.png",
   },
   {
     name: "PUMA x SONIC RS-X Sneakers",
-    floor: 11923.2,
+    floor: 1192.2,
     image: "/15.png",
   },
 ];
@@ -174,12 +174,12 @@ export const featured = [
 export const collectionAssets = [
   {
     name: "SF Light - Fighter 291",
-    listing: 193.23,
+    listing: 12.39,
     image: "/20.png",
   },
   {
     name: "SF Light - Fighter 12",
-    listing: 193.23,
+    listing: 205.23,
     image: "/21.png",
   },
   {
@@ -194,22 +194,40 @@ export const collectionAssets = [
   },
   {
     name: "SF Heavy - Fighter 2209",
-    listing: 193.23,
+    listing: 948.2,
     image: "/24.png",
   },
   {
     name: "SF Light - Fighter 812",
-    listing: 193.23,
+    listing: 1023.23,
     image: "/25.png",
   },
   {
     name: "SF Heavy - Fighter 183",
-    listing: 193.23,
+    listing: 384.23,
     image: "/26.png",
   },
   {
     name: "SF Light - Fighter 744",
-    listing: 193.23,
+    listing: 722.23,
     image: "/27.png",
+  },
+];
+
+export const myAssets = [
+  {
+    name: "SF Light - Fighter 291",
+    listing: "Unlisted",
+    image: "/20.png",
+  },
+  {
+    name: "Ultra Motorbikes - 9394",
+    listing: 103.23,
+    image: "/30.png",
+  },
+  {
+    name: "Star Wars - X Wing Starfighter 3",
+    listing: 19.23,
+    image: "/31.png",
   },
 ];
