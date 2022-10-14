@@ -83,7 +83,7 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   isSell?: boolean;
-  pid: string;
+  pid?: string;
 };
 
 function TradeModal({ isOpen, onClose, isSell, pid }: ModalProps) {
